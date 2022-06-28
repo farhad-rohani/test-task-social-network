@@ -14,7 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Route::get('/storage/private/{model_type}/{model_id}/{file_name}', function ($model_type, $model_id, $file_name) {
+//    $path = 'app/private/' . $model_type . '/' . $model_id . '/' . $file_name;
+//    return response()->file(storage_path($path));
+//});
 Route::get('/', function () {
+
+    return view('welcome');
     return
 
         User::
@@ -23,20 +29,18 @@ Route::get('/', function () {
                 ->whereFollowerId(211)
                 ->approved();
         })->
-    with(['followings' => function ($query) {
+        with(['followings' => function ($query) {
 //            $query->whereFollowerId($user->id)->approved();
-        $query
-            ->whereFollowerId(211)
-            ->approved();
-    }])->get();
-
-
+            $query
+                ->whereFollowerId(211)
+                ->approved();
+        }])->get();
 
 
 //
     $user = User::with('messages.image')->first();
 
-$user->messages[2]->image->delete();
+    $user->messages[2]->image->delete();
     return $user->load('messages.image');
 //    $user->profile()->create([
 //        'description' => 'lorem'
@@ -44,18 +48,12 @@ $user->messages[2]->image->delete();
 //    \App\Models\Profile::create(['user_id' => 1, 'description' => 'ssssss']);
 
 
-
-
-
-
-
-
-return
-    \App\Models\User::with(['followers', 'followings' => function ($query) {
-        $query->approved();
-    }])
+    return
+        \App\Models\User::with(['followers', 'followings' => function ($query) {
+            $query->approved();
+        }])
 //        ->whereHas('followers')
-        ->whereHas('followings')
-        ->first();
+            ->whereHas('followings')
+            ->first();
     return view('welcome');
 });

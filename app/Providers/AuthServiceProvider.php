@@ -5,9 +5,11 @@ namespace App\Providers;
 use App\Models\Media;
 use App\Models\Message;
 use App\Models\Profile;
+use App\Models\User;
 use App\Policies\MediaPolicy;
 use App\Policies\MessagePolicy;
 use App\Policies\ProfilePolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -23,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
         Message::class => MessagePolicy::class,
         Profile::class => ProfilePolicy::class,
         Media::class => MediaPolicy::class,
+        User::class => UserPolicy::class,
     ];
 
     /**

@@ -15,7 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable,\App\Models\lib\Media;
 
     /**
      * The attributes that are mass assignable.
@@ -73,10 +73,7 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
-    public function image(): MorphOne
-    {
-        return $this->morphOne(Media::class, 'model');
-    }
+
 
 
     public function messages(): HasMany

@@ -2,7 +2,14 @@
 
 namespace App\Exceptions;
 
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -43,8 +50,34 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function (Exception $e, $request) {
+            if ($request->is('api/*')) {
+                $code = 500;
+                $list = [
+                    'message' => $e->getMessage(),
+                    'exception' => get_class($e),
+                ];
+
+                if ($e instanceof ValidationException) {
+                    $list = [
+                        ...$list,
+                        'errors' => $e->validator->errors()->messages(),
+                    ];
+                    $code = 422;
+                }elseif ($e instanceof ModelNotFoundException) {
+                    $code = 404;
+                }
+                elseif ($e instanceof AuthorizationException || $e instanceof AuthenticationException ) { //////خطای مچوز ////////
+                    $code = 403;
+                }
+                elseif ($e instanceof HttpException) {
+                    $code = $e->getStatusCode();
+                }
+                elseif ($e instanceof QueryException) {
+                    //
+                }
+                return response()->json($list, $code);
+            }
         });
     }
 }

@@ -6,18 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class Profile extends Model
 {
-    use HasFactory;
+    use HasFactory,\App\Models\lib\Media;
+
     protected $fillable = [
-        'description',
+        'description', 'first_name', 'last_name'
     ];
 
-    public function image(): MorphOne
-    {
-        return $this->morphOne(Media::class, 'model');
-    }
 
     public function user(): BelongsTo
     {

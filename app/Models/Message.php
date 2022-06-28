@@ -9,13 +9,9 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Message extends Model
 {
-    use HasFactory;
+    use HasFactory,\App\Models\lib\Media;
 
     protected $guarded = [];
-    public function image(): MorphOne
-    {
-        return $this->morphOne(Media::class, 'model');
-    }
 
     public function user(): BelongsTo
     {

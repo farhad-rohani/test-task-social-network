@@ -1,0 +1,674 @@
+{
+	"info": {
+		"_postman_id": "acf86e7f-d426-42de-9ee6-e68e9f513919",
+		"name": "Social Network v2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var res = pm.response.json();",
+									"pm.globals.set(\"token\", res.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "a@a.a",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "a",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/v2/register",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var res = pm.response.json();",
+									"pm.collectionVariables.set(\"token\", res.token);",
+									"pm.globals.set(\"token\", res.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "payton96@example.org",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/v2/login",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var res = pm.response.json();",
+									"pm.globals.set(\"token\", res.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "a@a.a6",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "aasssssssssss",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/v2/logout",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/v2/profile/4",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"4"
+							]
+						},
+						"description": "show"
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "farhad",
+									"type": "default"
+								},
+								{
+									"key": "last_name",
+									"value": "rohani",
+									"type": "default"
+								},
+								{
+									"key": "description",
+									"value": "tozih tozih tozih tozih tozih tozih ",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/home/f/Pictures/flowers-garden-petunia.webp"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/v2/profile",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "farhads",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "rohani",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "tozih tozih tozih tozih tozih tozih ",
+									"type": "text"
+								},
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/home/f/Pictures/Screenshot from 2022-06-16 21-50-10.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/v2/profile/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_method",
+									"value": "DELETE",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/v2/profile/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/v2/profile/4",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"4"
+							]
+						},
+						"description": "show"
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/v2/profile/4",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"4"
+							]
+						},
+						"description": "show"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_method",
+									"value": "DELETE",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/v2/profile/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "follow",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/v2/profile/4",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"4"
+							]
+						},
+						"description": "show"
+					},
+					"response": []
+				},
+				{
+					"name": "followers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/v2/profile/21/follower?approved_from=2022-06-24&approved_to=2022-06-30&create_from=2022-06-24&create_to=2022-06-30&update_from=2022-06-24&update_to=2022-06-30",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"21",
+								"follower"
+							],
+							"query": [
+								{
+									"key": "approved",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "approved",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "approved_from",
+									"value": "2022-06-24"
+								},
+								{
+									"key": "approved_to",
+									"value": "2022-06-30"
+								},
+								{
+									"key": "create_from",
+									"value": "2022-06-24"
+								},
+								{
+									"key": "create_to",
+									"value": "2022-06-30"
+								},
+								{
+									"key": "update_from",
+									"value": "2022-06-24"
+								},
+								{
+									"key": "update_to",
+									"value": "2022-06-30"
+								}
+							]
+						},
+						"description": "index"
+					},
+					"response": []
+				},
+				{
+					"name": "followings",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/v2/profile/21/following?approved_from=2022-06-24&approved_to=2022-06-30&create_from=2022-06-24&create_to=2022-06-30&update_from=2022-06-24&update_to=2022-06-30",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"21",
+								"following"
+							],
+							"query": [
+								{
+									"key": "approved",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "approved",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "approved_from",
+									"value": "2022-06-24"
+								},
+								{
+									"key": "approved_to",
+									"value": "2022-06-30"
+								},
+								{
+									"key": "create_from",
+									"value": "2022-06-24"
+								},
+								{
+									"key": "create_to",
+									"value": "2022-06-30"
+								},
+								{
+									"key": "update_from",
+									"value": "2022-06-24"
+								},
+								{
+									"key": "update_to",
+									"value": "2022-06-30"
+								}
+							]
+						},
+						"description": "index"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "domain",
+			"value": "http://127.0.0.1:8000",
+			"type": "default"
+		}
+	]
+}
